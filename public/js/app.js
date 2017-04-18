@@ -16,10 +16,8 @@ function getGettyData(callback, query, headers = {}) {
 
 function addImagesToDOM() {
   const responseText = JSON.parse(this.responseText);
-  for (let i = 0; i < responseText.result_count; ++i) {
-    if (i >= 30) {
-      break;
-    }
+  // Getty Images sends back a maximum of 30 (zero-based) images with a response -- if that's hit, terminate the loop
+  for (let i = 0; i < responseText.result_count && i <= 29; ++i) {
     let image = document.createElement('img');
     image.src = responseText.images[i].display_sizes[0].uri;
     document.querySelector('#img-container').appendChild(image);
