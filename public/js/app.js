@@ -44,6 +44,7 @@ document.querySelector('#btn-search').addEventListener('click', () => {
 
 // TODO: Make this less hacky by parsing the cookie string
 if (document.cookie) {
+  document.querySelector('#input-search').value = document.cookie.slice(7);
   getGettyData(addImagesToDOM, `https://api.gettyimages.com/v3/search/images?phrase=${document.cookie.slice(7)}`, {'Api-Key': API_KEY});
 }
 
