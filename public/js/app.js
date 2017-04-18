@@ -17,7 +17,7 @@ function getGettyData(callback, query, headers = {}) {
 function addImagesToDOM() {
   const responseText = JSON.parse(this.responseText);
   for (let i = 0; i < responseText.result_count; ++i) {
-    if (i > 30) {
+    if (i >= 30) {
       break;
     }
     let image = document.createElement('img');
