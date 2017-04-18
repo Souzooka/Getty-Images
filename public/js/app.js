@@ -14,7 +14,7 @@ function getGettyData(callback, query, headers = {}) {
   xhr.send();
 }
 
-function test() {
+function addImagesToDOM() {
   const responseText = JSON.parse(this.responseText);
   for (let i = 0; i < responseText.result_count; ++i) {
     if (i > 30) {
@@ -26,5 +26,10 @@ function test() {
     document.querySelector('#img-container').appendChild(image);
   }
 }
-console.log('test');
-getGettyData(test, 'https://api.gettyimages.com/v3/search/images?phrase=video%20games', {'Api-Key': API_KEY});
+
+document.querySelector('#btn-search').addEventListener('click', () => {
+  const input = document.querySelector('#input-search');
+  getGettyData(addImagesToDOM, `https://api.gettyimages.com/v3/search/images?phrase=${input.value}`, {'Api-Key': API_KEY});
+});
+
+
