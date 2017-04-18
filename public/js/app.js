@@ -22,14 +22,29 @@ function addImagesToDOM() {
     }
     let image = document.createElement('img');
     image.src = responseText.images[i].display_sizes[0].uri;
-    console.log(document.querySelector('#img-container'));
     document.querySelector('#img-container').appendChild(image);
   }
 }
 
+function clearImgs() {
+  const imgContainer = document.querySelector('#img-container');
+  if (imgContainer) {
+    while (imgContainer.firstChild) {
+      imgContainer.removeChild(imgContainer.firstChild);
+    }
+  }
+}
+
 document.querySelector('#btn-search').addEventListener('click', () => {
+  clearImgs();
   const input = document.querySelector('#input-search');
+  document.cookie = `search=${input.value}`;
   getGettyData(addImagesToDOM, `https://api.gettyimages.com/v3/search/images?phrase=${input.value}`, {'Api-Key': API_KEY});
 });
+
+// TODO: Make this less hacky by parsing the cookie string
+if (document.cookie) {
+  getGettyData(addImagesToDOM, `https://api.gettyimages.com/v3/search/images?phrase=${document.cookie.slice(7)}`, {'Api-Key': API_KEY});
+}
 
 
