@@ -1,0 +1,17 @@
+
+#header {
+  position: fixed;
+  border: 1px solid black
+}
+
+#side-bar {
+  position: fixed;
+  top: 50px;
+  border: 1px solid black
+
+}
+
+#img-container {
+  position: relative;
+  top: 100px;
+}
